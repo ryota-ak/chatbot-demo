@@ -4,7 +4,6 @@ import './assets/styles/style.css';
 import {AnswersList, Chats} from "./components/index";
 import FormDialog from './components/Forms/FormDialog';
 
-//テスト
 const App = () => {
   const [answers, setAnswers] = useState([]);
   const [chats, setChats] = useState([]);
