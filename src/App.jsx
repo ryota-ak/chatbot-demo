@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import defaultDataset from "./dataset";
 import './assets/styles/style.css';
-import {AnswersList, Chats} from "./components/index";
+import {AnswersList, Chats} from "./components";
 import FormDialog from './components/Forms/FormDialog';
 
 const App = () => {
@@ -11,22 +11,18 @@ const App = () => {
   const [dataset, setDataset] = useState(defaultDataset);
   const [open, setOpen] = useState(false);
 
-  const displayNextQuestion = (nextQuestionId, nextDataset) =>{
+  const displayNextQuestion = (nextQuestionId) =>{
     addChats({
-      text: nextDataset.question,
+      text: dataset[nextQuestionId].question,
       type: 'question'
     });
 
-    setAnswers(nextDataset.answers);
+    setAnswers(dataset[nextQuestionId].answers);
     setCurrentId(nextQuestionId);
-
   }
 
   const selectAnswer = (selectedAnswer, nextQuestionId) => {
     switch (true) {
-      // case (nextQuestionId === 'init'):
-      //   setTimeout(()=>displayNextQuestion(nextQuestionId, dataset[nextQuestionId]), 500);
-      //   break;
 
       case (nextQuestionId === 'contact'):
         handleClickOpen();
@@ -45,15 +41,14 @@ const App = () => {
           type: 'answer'
         });
 
-        setTimeout(()=>displayNextQuestion(nextQuestionId, dataset[nextQuestionId]), 500);
+        // setTimeout(() => displayNextQuestion(nextQuestionId, dataset[nextQuestionId]), 500);
+        setTimeout(() => displayNextQuestion(nextQuestionId), 500);
         break;
     }
   }
 
   const addChats = (chat) => {
-      setChats(prevChats => {
-        return [...prevChats, chat];
-      })
+      setChats(prevChats => [...prevChats, chat]);
   }
 
   const handleClickOpen = () => {
@@ -65,7 +60,8 @@ const App = () => {
   }, [setOpen]);
 
   useEffect(() => {
-    displayNextQuestion(currentId, dataset[currentId]);
+    // displayNextQuestion(currentId, dataset[currentId]);
+    displayNextQuestion(currentId);
   }, []);
 
   useEffect(() => {

@@ -1,31 +1,31 @@
-import React from 'react';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-// import classes from '*.module.css';
+import React from 'react'
+import { makeStyles, createStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles(() =>
   createStyles({
     "button":{
-      borderColor:'#ffb549',
-      color:'#ffb549',
-      fontWeight: 600,
+      borderColor:'pink',
+      color:'pink',
+      fontWeight: 'bold',
       marginBottom: '8px',
       "&:hover": {
-        backgroundColor:'#ffb549',
+        backgroundColor:'pink',
         color: "#fff"
       }
     }
-  }),
+  })
 )
 
-const Answer = (props) =>{
+const Answer = ({answer, select}) =>{
   const classes = useStyles();
 
   return (
     <Button
       className={classes.button}
-      variant="outlined" onClick={() => props.select(props.content, props.nextId)}>
-      {props.content}
+      variant="outlined"
+      onClick={() => select(answer.content, answer.nextId)}>
+      {answer.content}
     </Button>
   );
 }
